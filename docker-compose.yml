@@ -28,13 +28,7 @@ services:
 
   redis:
     image: redis:alpine
-    container_name: filerun
-    env_file: ./docker.env
     restart: always
-    security_opt:
-      - no-new-privileges
-    env_file:
-      - .env
     networks:
       - internal
     ports:
@@ -45,10 +39,8 @@ services:
 
   postgres:
     image: postgres:alpine
-    container_name: filerun
+    container_name: outlinedb
     restart: always
-    security_opt:
-      - no-new-privileges
     env_file:
       - .env
     networks:
@@ -58,9 +50,9 @@ services:
     volumes:
       - ./database-data:/var/lib/postgresql/data
     environment:
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: pass
-      POSTGRES_DB: outline
+      POSTGRES_USER: ${USER}
+      POSTGRES_PASSWORD: ${PASSWORD}
+      POSTGRES_DB: ${DATABASE}
 
 networks:
   nextcloud:
