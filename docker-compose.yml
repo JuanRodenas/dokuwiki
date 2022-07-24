@@ -17,7 +17,7 @@ services:
     labels:
       # dokuwiki
       - "traefik.enable=true"
-      - "traefik.http.routers.dokuwiki.rule=Host(`${domain}`)"
+      - "traefik.http.routers.dokuwiki.rule=Host(`${DOMAIN}`)"
       - "traefik.http.routers.dokuwiki.entrypoints=websecure"
       - "traefik.http.routers.dokuwiki.tls=true"
       - "traefik.http.routers.dokuwiki.tls.certresolver=lets-encrypt"
