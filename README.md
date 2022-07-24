@@ -5,7 +5,7 @@ El wiki y la base de conocimientos más rápidos para equipos en crecimiento. He
 
 ## About
 <p align="center">
-  <img src="https://github.com/JuanRodenas/docuwiki/blob/main/dokuwiki.png"
+  <img src="https://github.com/JuanRodenas/dokuwiki/blob/main/dokuwikilogo.png"
        width="300"/>
 </p>
 
