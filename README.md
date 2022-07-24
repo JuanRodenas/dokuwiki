@@ -16,20 +16,15 @@
 </ul>
 
 
-## Configuración docker
-Para una instalación manual de producción auto-alojada estos son los pasos recomendados:
-1. Primero configurar los servidores Redis y Postgres, esto está fuera del alcance de la guía.
-2.Descargue la última imagen oficial de Docker, las nuevas versiones están disponibles a mediados de cada mes:
-`docker pull outlinewiki/outline`
-3. Utilizando el .env.sample como referencia, establezca las variables necesarias en su entorno de producción. Puedes exportar las variables de entorno directamente, o crear un archivo .env y pasarlo a la imagen docker así
-`docker run --env-file=.env outlinewiki/outline`
-4. Configure la base de datos con yarn db:migrate. Production asume una conexión SSL a la base de datos por defecto, si Postgres está en la misma máquina y no es SSL puedes migrar con yarn db:migrate --env=production-ssl-disabled, por ejemplo:
-`docker run --rm outlinewiki/outline yarn db:migrate`
-5. Inicie el contenedor:
-`docker run outlinewiki/outline`
-6. Visita http://you_server_ip:3000 y deberías poder ver la página de Outline
-7. El número de puerto se puede cambiar usando la variable de entorno PORT
-`(Opcional) Puedes añadir un nginx u otro proxy inverso para servir tu instancia de Outline para una URL limpia sin el número de puerto, soportar SSL, etc.`
+## Arquitecturas compatibles
+Las arquitecturas soportadas por esta imagen son:
+
+| Architecture | Available | Tag |
+| :----: | :----: | ---- |
+| x86-64 | ✅ | amd64-\<version tag\> |
+| arm64 | ✅ | arm64v8-\<version tag\> |
+| armhf| ✅ | arm32v7-\<version tag\> |
+
 
 ## Files
 - Creamos carpeta en el directorio de persistencia:
