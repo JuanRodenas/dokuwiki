@@ -1,63 +1,37 @@
-version: "3"
+https://docs.linuxserver.io/images/docker-dokuwiki
+
+
+
+---
+version: "3.3"
 
 services:
-  outline:
-    image: outlinewiki/outline:latest
-    container_name: filerun
-    user: ${UID}:${GID}
-    security_opt:
-      - no-new-privileges
-    env_file:
-      - .env
-    networks:
-      - internal
-      - proxy
-     volumes:
-      - ./data:/opt/outline
-    depends_on:
-      - postgres
-      - redis
-      - storage
-     labels:
-      # outline
-      - "traefik.enable=true"
-      - "traefik.http.routers.outline.rule=Host(`${DOMAIN}`)"
-      - "traefik.http.routers.outline.entrypoints=websecure"
-      - "traefik.http.routers.outline.tls=true"
-      - "traefik.http.routers.outline.tls.certresolver=lets-encrypt"
-      - "traefik.http.services.outline.loadbalancer.server.port=3000"
-      - "traefik.http.middlewares.outline.headers.sslredirect=true"
-
-  redis:
-    image: redis:alpine
-    restart: always
-    networks:
-      - internal
-    ports:
-      - "6379:6379"
-    volumes:
-      - ./redis.conf:/redis.conf
-    command: ["redis-server", "/redis.conf"]
-
-  postgres:
-    image: postgres:alpine
-    container_name: outlinedb
-    restart: always
-    env_file:
-      - .env
-    networks:
-      - internal
-    ports:
-      - "5432:5432"
-    volumes:
-      - ./database-data:/var/lib/postgresql/data
+  dokuwiki:
+    image: lscr.io/linuxserver/dokuwiki
+    container_name: dokuwiki
     environment:
-      POSTGRES_USER: ${USER}
-      POSTGRES_PASSWORD: ${PASSWORD}
-      POSTGRES_DB: ${DATABASE}
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Madrid
+    volumes:
+      - /patch/to/data/dokuwiki/appdata/config:/config
+    networks:
+      - proxy
+    restart: always
+    labels:
+      # dokuwiki
+      - "traefik.enable=true"
+      - "traefik.http.routers.dokuwiki.rule=Host(`domain`)"
+      - "traefik.http.routers.dokuwiki.entrypoints=websecure"
+      - "traefik.http.routers.dokuwiki.tls=true"
+      - "traefik.http.routers.dokuwiki.tls.certresolver=lets-encrypt"
+      - "traefik.http.services.dokuwiki.loadbalancer.server.port=80"
+      - "traefik.http.middlewares.dokuwiki.headers.sslredirect=true"
 
+volumes:
+  dokuwiki:
+    driver: local
+    
 networks:
-  nextcloud:
+  proxy:
     external: true
-  internal:
-    external: false
