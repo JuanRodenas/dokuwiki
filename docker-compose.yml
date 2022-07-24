@@ -12,6 +12,8 @@ services:
     networks:
       - internal
       - proxy
+     volumes:
+      - ./data:/opt/outline
     depends_on:
       - postgres
       - redis
