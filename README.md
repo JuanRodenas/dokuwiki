@@ -25,6 +25,17 @@ Las arquitecturas soportadas por esta imagen son:
 | arm64 | ✅ | arm64v8-\<version tag\> |
 | armhf| ✅ | arm32v7-\<version tag\> |
 
+## Parámetros
+Los parámetros del docker-compose:
+
+| Parameter | Function |
+| :----: | --- |
+| `-p 80` | Application HTTP Port |
+| `-p 443` | #optional Application HTTPS Port |
+| `-e PUID=1000` | for UserID - see below for explanation |
+| `-e PGID=1000` | for GroupID - see below for explanation |
+| `-e TZ=Europe/London` | Specify a timezone to use EG Europe/London. |
+| `-v /config` | Configuration files. |
 
 ## Files
 - Creamos carpeta en el directorio de persistencia:
