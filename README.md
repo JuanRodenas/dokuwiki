@@ -1,18 +1,25 @@
+## docuwiki
+El wiki y la base de conocimientos más rápidos para equipos en crecimiento. Hermosa, rica en características y compatible con Markdown.
+ 
+    
+
+## About
+
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/31465/34380645-bd67f474-eb0b-11e7-8d03-0151c1730654.png" height="29" />
-</p>
-<p align="center">
-  <i>A fast, collaborative, knowledge base for your team built using React and Node.js.<br/>Try out Outline using our hosted version at <a href="https://www.getoutline.com">www.getoutline.com</a>.</i>
-  <br/>
-  <img width="1640" alt="screenshot" src="https://user-images.githubusercontent.com/380914/110356468-26374600-7fef-11eb-9f6a-f2cc2c8c6590.png">
+  <img src="https://github.com/JuanRodenas/docuwiki/blob/main/dokuwiki.png"
+       width="300"/>
 </p>
 
+<p align="center">
+  <img src="https://logos-world.net/wp-content/uploads/2021/02/Docker-Symbol.png" 
+       width="300"/>
+</p>
 
 ### Documentación
 <ul>
-<p><a href="https://github.com/outline/outline">Github</a></p>
-<p><a href="https://app.getoutline.com/share/770a97da-13e5-401e-9f8a-37949c19f97e/">Documentation</a></p>
-<p><a href="https://hub.docker.com/r/outlinewiki/outline">Docker Image</a></p>
+<p><a href="https://github.com/linuxserver/docker-dokuwiki">Github</a></p>
+<p><a href="https://docs.linuxserver.io/images/docker-dokuwiki">Documentation</a></p>
+<p><a href="https://hub.docker.com/r/linuxserver/dokuwiki">Docker Image</a></p>
 </ul>
 
 
@@ -45,7 +52,7 @@ cd filerun
 ```
 - Descargamos el repositorio:
 ```
-git clone "https://github.com/JuanRodenas/outline.git"
+git clone "https://github.com/JuanRodenas/docuwiki.git"
 ```
 
 ### Configuration
