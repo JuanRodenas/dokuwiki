@@ -3,17 +3,40 @@ version: "3"
 services:
   outline:
     image: outlinewiki/outline:latest
-    env_file: ./docker.env
-    ports:
-      - "3000:3000"
+    container_name: filerun
+    user: ${UID}:${GID}
+    security_opt:
+      - no-new-privileges
+    env_file:
+      - .env
+    networks:
+      - internal
+      - proxy
     depends_on:
       - postgres
       - redis
       - storage
+     labels:
+      # outline
+      - "traefik.enable=true"
+      - "traefik.http.routers.outline.rule=Host(`${DOMAIN}`)"
+      - "traefik.http.routers.outline.entrypoints=websecure"
+      - "traefik.http.routers.outline.tls=true"
+      - "traefik.http.routers.outline.tls.certresolver=lets-encrypt"
+      - "traefik.http.services.outline.loadbalancer.server.port=3000"
+      - "traefik.http.middlewares.outline.headers.sslredirect=true"
 
   redis:
     image: redis:alpine
+    container_name: filerun
     env_file: ./docker.env
+    restart: always
+    security_opt:
+      - no-new-privileges
+    env_file:
+      - .env
+    networks:
+      - internal
     ports:
       - "6379:6379"
     volumes:
@@ -22,12 +45,25 @@ services:
 
   postgres:
     image: postgres:alpine
-    env_file: ./docker.env
+    container_name: filerun
+    restart: always
+    security_opt:
+      - no-new-privileges
+    env_file:
+      - .env
+    networks:
+      - internal
     ports:
       - "5432:5432"
     volumes:
-      - database-data:/var/lib/postgresql/data
+      - ./database-data:/var/lib/postgresql/data
     environment:
       POSTGRES_USER: user
       POSTGRES_PASSWORD: pass
       POSTGRES_DB: outline
+
+networks:
+  nextcloud:
+    external: true
+  internal:
+    external: false
