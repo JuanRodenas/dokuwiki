@@ -1,7 +1,3 @@
-https://docs.linuxserver.io/images/docker-dokuwiki
-
-
-
 ---
 version: "3.3"
 
@@ -10,8 +6,8 @@ services:
     image: lscr.io/linuxserver/dokuwiki
     container_name: dokuwiki
     environment:
-      - PUID=1000
-      - PGID=1000
+      - PUID=${UID}
+      - PGID=${GID}
       - TZ=Europe/Madrid
     volumes:
       - /patch/to/data/dokuwiki/appdata/config:/config
@@ -21,7 +17,7 @@ services:
     labels:
       # dokuwiki
       - "traefik.enable=true"
-      - "traefik.http.routers.dokuwiki.rule=Host(`domain`)"
+      - "traefik.http.routers.dokuwiki.rule=Host(`${domain}`)"
       - "traefik.http.routers.dokuwiki.entrypoints=websecure"
       - "traefik.http.routers.dokuwiki.tls=true"
       - "traefik.http.routers.dokuwiki.tls.certresolver=lets-encrypt"
