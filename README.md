@@ -1,7 +1,5 @@
 ## docuwiki
 El wiki y la base de conocimientos más rápidos para equipos en crecimiento. Hermosa, rica en características y compatible con Markdown.
- 
-    
 
 ## About
 <p align="center">
@@ -47,12 +45,12 @@ Los parámetros del docker-compose:
 ## Files
 - Creamos carpeta en el directorio de persistencia:
 ```
-mkdir filerun filerun/html filerun/user-files filerun/db
-cd filerun
+mkdir dokuwiki dokuwiki/appdata
+cd dokuwiki
 ```
 - Descargamos el repositorio:
 ```
-git clone "https://github.com/JuanRodenas/docuwiki.git"
+git clone "https://github.com/JuanRodenas/dokuwiki.git"
 ```
 
 ### Configuration
